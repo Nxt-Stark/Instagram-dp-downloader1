@@ -5,7 +5,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from handlers.broadcast import broadcast
 from handlers.check_user import handle_user_status
 from handlers.database import Database
-from Database.users_chats_db import db
+from handlers.database.users_chats_db import db
 from utils import temp
 
 logging.basicConfig(
