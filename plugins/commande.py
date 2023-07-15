@@ -2,6 +2,7 @@ import logging
 import os
 import re
 import time
+from Script import script
 from traceback import format_exc
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -24,10 +25,6 @@ mediaregpat = r"(https?:\/\/(?:www\.)?instagram\.com\/(?:p|reel|tv)\/([^\/?#&\n]
 proregpat = r"(https?:\/\/(?:www\.)?instagram\.com\/([a-z1-9_\.?=]+)).*"
 
 
-def welcome_msg():
-    return "Welcome to the Instagram DP Saver Bot!"
-
-
 def get_username(url):
     match = re.search(proregpat, url)
     if match:
@@ -38,25 +35,39 @@ def create_caption(user):
     return f"Username: {user.username}\nFull Name: {user.full_name}\nFollowers: {user.followers}\nFollowing: {user.followees}"
 
 
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 @Client.on_message(filters.command(["start"]))
 def start(client, message):
     name = message.from_user.username
-    message.reply_text(welcome_msg())
+    
+    button1 = InlineKeyboardButton("Channel", url="https://t.me/HTechMedia")
+    button2 = InlineKeyboardButton("Support", url="https://t.me/HTechMediaSupport")
+    button3 = InlineKeyboardButton("Source", url="https://github.com/Nxt-Stark/Instagram-dp-downloader")
+    button4 = InlineKeyboardButton("Owner", url="https://t.me/NxtStark")
+    button5 = InlineKeyboardButton("Help", url="https://www.youtube.com/c/HTechMedia")
+
+    keyboard = InlineKeyboardMarkup([[button1, button2], [button3, button4],[button5]])
+
+    message.reply_photo(
+        photo="https://telegra.ph/file/85a40fa28ea0f0d4db1c6.jpg"
+        caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME), 
+        reply_markup=keyboard
+        parse_mode=enums.ParseMode.HTML)
 
 
 @Client.on_message(filters.command(["help"]))
 def help_msg(client, message):
-    message.reply_text("Send any Instagram user's username (without @) or their profile URL to get their profile picture.")
+    button1 = InlineKeyboardButton("Devoloper", url="https://t.me/NxtStark")
+    button2 = InlineKeyboardButton("Support", url="https://t.me/HTechMediaSupport")
+    button3 = InlineKeyboardButton("Youtube", url="https://www.youtube.com/c/HTechMedia")
+    keyboard = InlineKeyboardMarkup([[button1, button2], [button3]])
+    message.reply_video(
+        video="https://example.com/video.mp4"
+        caption=script.HELP_TXT,
+        reply_markup=keyboard,
+        parse_mode=enums.ParseMode.HTML)
 
-
-@Client.on_message(filters.command(["contact"]))
-def contact(client, message):
-    keyboard = [[InlineKeyboardButton(
-        "Contact", url=f"telegram.me/{TELEGRAM_USERNAME}")], ]
-
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    message.reply_text('Contact the Maker:', reply_markup=reply_markup)
 
 
 @Client.on_message(filters.text)
