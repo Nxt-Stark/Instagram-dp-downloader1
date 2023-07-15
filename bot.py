@@ -1,11 +1,10 @@
 from pyrogram import Client, __version__, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-import database
-from database.users_chats_db import db
-from utils import temp
 from handlers.broadcast import broadcast
 from handlers.check_user import handle_user_status
 from handlers.database import Database
+from utils import temp
+
 class Bot(Client):
     def __init__(self):
         super().__init__(
