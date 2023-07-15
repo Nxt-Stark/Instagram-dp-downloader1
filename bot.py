@@ -1,5 +1,6 @@
 from pyrogram import Client, __version__, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+import database
 from database.users_chats_db import db
 from utils import temp
 from handlers.broadcast import broadcast
