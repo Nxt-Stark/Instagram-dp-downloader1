@@ -1,12 +1,12 @@
 import datetime
 import logging
-
+from info import DB_URL, DB_NAME, LOG_CHANNEL
 from pyrogram import Client
 from handlers.database import Database
 
-DB_URL = config.DB_URL
-DB_NAME = config.DB_NAME
-LOG_CHANNEL = config.LOG_CHANNEL
+DB_URL = DB_URL
+DB_NAME = DB_NAME
+LOG_CHANNEL = LOG_CHANNEL
 
 db = Database(DB_URL, DB_NAME)
 
