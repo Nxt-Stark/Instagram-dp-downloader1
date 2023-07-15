@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from handlers.broadcast import broadcast
 from handlers.check_user import handle_user_status
 from handlers.database import Database
-from info import SESSION
+from info import SESSION, API_ID, API_HASH, BOT_TOKEN, APP_NAME, TELEGRAM_USERNAME, DB_URL, DB_NAME, LOG_CHANNEL, BROADCAST_AS_COPY
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
