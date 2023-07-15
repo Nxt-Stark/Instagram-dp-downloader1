@@ -4,8 +4,9 @@ from pyrogram.types import ChatPermissions
 
 
 class Database:
-    def __init__(self, client: Client):
-        self.client = client
+    def __init__(self, url, name):
+        self.url = url
+        self.name = name
 
     async def new_user(self, chat_id):
         return {
