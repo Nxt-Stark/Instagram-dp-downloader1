@@ -2,12 +2,10 @@ import logging
 import os
 import re
 import time
-from Script import script
 from traceback import format_exc
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from instaloader import Instaloader, Profile
-
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -15,8 +13,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 L = Instaloader()
+
 TOKEN = os.getenv("BOT_TOKEN")
 APP_NAME = os.getenv("APP_NAME")
 TELEGRAM_USERNAME = os.getenv("TELEGRAM_USERNAME")
@@ -29,16 +27,19 @@ def get_username(url):
     if match:
         return match.group(2)
 
-
 def create_caption(user):
     return f"Username: {user.username}\nFull Name: {user.full_name}\nFollowers: {user.followers}\nFollowing: {user.followees}"
 
+app = Client(
+    "my_bot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN,
+)
 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
-@Client.on_message(filters.command(["start"]))
+@app.on_message(filters.command("start"))
 def start(client, message):
-        chat_id = message.from_user.id
+    chat_id = message.from_user.id
     if not await db.is_user_exist(chat_id):
         data = await client.get_me()
         BOT_USERNAME = data.username
@@ -58,30 +59,33 @@ def start(client, message):
     button4 = InlineKeyboardButton("Owner", url="https://t.me/NxtStark")
     button5 = InlineKeyboardButton("Help", url="https://www.youtube.com/c/HTechMedia")
 
-    keyboard = InlineKeyboardMarkup([[button1, button2], [button3, button4],[button5]])
+    keyboard = InlineKeyboardMarkup([[button1, button2], [button3, button4], [button5]])
 
-    await message.reply_photo(
+    client.send_photo(
+        chat_id=message.chat.id,
         photo="https://telegra.ph/file/85a40fa28ea0f0d4db1c6.jpg",
         caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME), 
-        reply_markup=keyboard
-        parse_mode=enums.ParseMode.HTML)
-    raise StopPropagation
+        reply_markup=keyboard,
+        parse_mode="HTML"
+    )
 
-@Client.on_message(filters.command(["help"]))
+@app.on_message(filters.command("help"))
 def help_msg(client, message):
-    button1 = InlineKeyboardButton("Devoloper", url="https://t.me/NxtStark")
+    button1 = InlineKeyboardButton("Developer", url="https://t.me/NxtStark")
     button2 = InlineKeyboardButton("Support", url="https://t.me/HTechMediaSupport")
-    button3 = InlineKeyboardButton("Youtube", url="https://www.youtube.com/c/HTechMedia")
+    button3 = InlineKeyboardButton("YouTube", url="https://www.youtube.com/c/HTechMedia")
     keyboard = InlineKeyboardMarkup([[button1, button2], [button3]])
-    await message.reply_video(
+    client.send_video(
+        chat_id=message.chat.id,
         video="https://example.com/video.mp4",
         caption=script.HELP_TXT,
         reply_markup=keyboard,
-        parse_mode=enums.ParseMode.HTML)
+        parse_mode="HTML"
+    )
 
 ADMIN_USER_ID = 1180676984
 
-@Client.on_message(filters.command("settings") & filters.user(ADMIN_ID))
+@app.on_message(filters.command("settings") & filters.user(ADMIN_USER_ID))
 async def opensettings(client, cmd):
     user_id = cmd.from_user.id
     await cmd.reply_text(
@@ -98,16 +102,16 @@ async def opensettings(client, cmd):
             ]
         ),
     )
-    
-@Client.on_message(filters.private & filters.command("broadcast") & filters.user(ADMIN_USER_ID))
+
+@app.on_message(filters.private & filters.command("broadcast") & filters.user(ADMIN_USER_ID))
 async def broadcast_handler_open(client, message):
     if message.reply_to_message is None:
         await message.delete()
     else:
         await broadcast(message, db)
 
-@Client.on_message(filters.private & filters.command("stats") & filters.user(ADMIN_USER_ID))
-async def sts(client, message: Message):
+@app.on_message(filters.private & filters.command("stats") & filters.user(ADMIN_USER_ID))
+async def sts(client, message):
     total_users = await db.total_users_count()
     total_notif_users = await db.total_notif_users_count()
     
@@ -117,7 +121,7 @@ async def sts(client, message: Message):
         quote=True
     )
 
-@Client.on_message(filters.text)
+@app.on_message(filters.text)
 def username(client, message):
     query = message.text
 
@@ -144,5 +148,4 @@ def username(client, message):
     else:
         message.reply_html("This bot only supports downloading of profile pictures. Please do not send media URLs.")
 
-
-
+app.run()
