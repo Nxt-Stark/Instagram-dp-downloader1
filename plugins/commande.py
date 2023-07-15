@@ -98,21 +98,4 @@ def username(client, message):
         message.reply_html("This bot only supports downloading of profile pictures. Please do not send media URLs.")
 
 
-@Client.on_message(filters.command(["source"]))
-def source(client, message):
-    message.reply_text("You can get the source code of this bot here:\n\nhttps://github.com/anishgowda21/Instagram_DP_Saver_Bot")
 
-
-@Client.on_message(filters.private)
-def error(client, message):
-    """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', message, message.text)
-
-
-def main():
-    app = Client("my_bot", bot_token=TOKEN)
-    app.run()
-
-
-if __name__ == '__main__':
-    main()
