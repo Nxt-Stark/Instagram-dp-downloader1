@@ -5,7 +5,7 @@ import random
 import string
 import time
 import traceback
-
+from info import BROADCAST_AS_COPY
 from pyrogram.errors import (
     FloodWait,
     InputUserDeactivated,
@@ -17,7 +17,7 @@ import config
 
 broadcast_ids = {}
 
-BROADCAST_AS_COPY = config.BROADCAST_AS_COPY
+BROADCAST_AS_COPY = BROADCAST_AS_COPY
 
 
 async def send_msg(client, user_id, message):
