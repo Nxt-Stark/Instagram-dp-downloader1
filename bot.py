@@ -1,9 +1,18 @@
+import logging
+import os
 from pyrogram import Client, __version__, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from handlers.broadcast import broadcast
 from handlers.check_user import handle_user_status
 from handlers.database import Database
+from Database.users_chats_db import db
 from utils import temp
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
 class Bot(Client):
     def __init__(self):
