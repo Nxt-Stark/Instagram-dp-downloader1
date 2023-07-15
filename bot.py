@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from handlers.broadcast import broadcast
 from handlers.check_user import handle_user_status
 from handlers.database import Database
-
+from info import SESSION
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
