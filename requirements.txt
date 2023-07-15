@@ -4,4 +4,3 @@ tgcrypto
 aiofiles
 motor
 dnspython
-database
