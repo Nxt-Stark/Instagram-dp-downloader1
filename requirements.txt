@@ -4,3 +4,5 @@ tgcrypto
 aiofiles
 motor
 dnspython
+requests==2.26.0
+beautifulsoup4==4.9.3
