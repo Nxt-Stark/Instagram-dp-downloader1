@@ -31,15 +31,7 @@ class Bot(Client):
             sleep_threshold=5,
         )
 
-    async def start(self):
-        me = await self.get_me()
-        self.username = "@" + me.username
-        logging.info(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
-        logging.info(LOG_STR)
 
-    async def stop(self, *args):
-        await super().stop()
-        logging.info("Bot stopped. Bye.")
 app = Bot()
 app.run()
 
