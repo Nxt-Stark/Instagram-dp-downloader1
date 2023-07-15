@@ -16,7 +16,7 @@ Made With ❤️ By <a href=https://t.me/HTechMedia>HTechMedia</a>"""
 <b>• ᴘᴇʀᴍᴀɴᴇɴᴛ ᴅᴍ ʟɪɴᴋ : <a href=https://telegram.dog/NxtStark>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a></b>
 <b>“му нєαят'ѕ α ѕтєяєσ. ιт вєαтѕ fσя уσυ, ѕσ ℓιѕтєи ¢ℓσѕє”</b>"""  
 
-    HELP_TXT = """<b>Hᴇʏ {} Fʀɪᴇɴᴅ Hᴇʀᴇ Yᴏᴜʀ Bᴜᴛᴛᴏɴs 👇</b>"""
+    HELP_TXT = """Nothing to help.This is way to simple 😂😂"""
 
 
     ABOUT_TXT = """<b>🤖 ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/Tamilanz_Auto_Filter_Bot>ᴍᴏᴠɪᴇs ғɪʟᴛᴇʀ ʙᴏᴛ</a>
